@@ -119,7 +119,7 @@ def main():
     X_train, Y_train, X_train_reshape = retrieve_data()
 
 
-    Niter = 10000
+    Niter = 100000
     maxMetric = -1
 
     #np.random.seed(1234)
@@ -128,7 +128,7 @@ def main():
         
         # Generate a uniform random Stiefel matric A and fit beta with minimal mean square prediction error on the training data set
         
-        A = randomA(F=100)
+        A = randomA(F=30)
         
         beta = fitBeta(A, X_train_reshape, Y_train)
         

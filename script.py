@@ -97,7 +97,29 @@ def cfs_search(
     m = metric_train(A, beta, X_train_reshape, Y_train)
     return m, A, beta
 
+def objectiv_function(x):
+    A_raw = x.reshape([250,10])
+    A, _ = np.linalg.qr(A_raw)
+    
+    X_stack = [
+        (X_train_reshape @ A)
+        .loc[(slice(None), k), :]
+        .reset_index(level=1)
+        .drop(["stocksID"], axis=1)
+        for k in range(50)
+    ]
+    
+    # fit beta
+    beta = fitBeta(A, X_train_reshape, Y_train)
 
+    # compute the metric on the training set and keep the best result
+
+    m = metric_train(A, beta, X_train_reshape, Y_train)
+    return m
+    
+    
+    
+    
 def retrieve_data():
     path = ""
 
